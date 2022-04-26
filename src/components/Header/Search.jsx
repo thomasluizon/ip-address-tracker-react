@@ -1,20 +1,25 @@
-const Search = () => {
-   const handleSubmit = e => {
-      e.preventDefault();
-   };
+import { useState } from 'react';
+
+const Search = props => {
+   const [inputValue, setInputValue] = useState('');
 
    return (
-      <form onSubmit={handleSubmit} className="header__search">
+      <form
+         onSubmit={e => props.handleSubmit(e, inputValue)}
+         className="header__search"
+      >
          <input
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
             type="text"
             placeholder="Search for any IP address or domain"
-            minlength="7"
-            maxlength="15"
+            minLength="7"
+            maxLength="15"
             size="15"
             pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
             required
          />
-         <button type="submit">&gt;</button>
+         <button>&gt;</button>
       </form>
    );
 };

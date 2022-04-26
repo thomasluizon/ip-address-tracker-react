@@ -79,6 +79,13 @@
   font-size: 1.2rem;
 }
 
+@media screen and (max-width: 768px) {
+  .header .header__info {
+    flex-direction: column;
+    bottom: -10rem;
+    height: 100%;
+  }
+}
 *,
 *::after,
 *::before {
