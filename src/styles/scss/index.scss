@@ -15,4 +15,10 @@
 
 body {
    font-family: 'Poppins', sans-serif;
+   overflow: hidden;
+}
+
+.leaflet-container {
+   width: 100vw;
+   height: 90vh;
 }
