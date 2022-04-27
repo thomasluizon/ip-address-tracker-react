@@ -68,7 +68,7 @@
   border-right: 1px solid lightgray;
 }
 .header .header__info-box h2 {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   color: gray;
   text-transform: uppercase;
   font-weight: 600;
@@ -76,14 +76,17 @@
 .header .header__info-box h3 {
   margin-bottom: 1.5rem;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 @media screen and (max-width: 768px) {
   .header .header__info {
     flex-direction: column;
-    bottom: -10rem;
-    height: 100%;
+    bottom: -200px;
+    height: 290px;
+  }
+  .header .header__info-box {
+    border: none;
   }
 }
 *,

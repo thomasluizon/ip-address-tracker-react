@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
 
 const App = () => {
-   const [ipUrl, setIpUrl] = useState('http://ip-api.com/json');
+   const ipUrl = 'http://ip-api.com/json/';
    const [ip, setIp] = useState('');
    const [city, setCity] = useState('');
    const [country, setCountry] = useState('');
@@ -15,24 +15,41 @@ const App = () => {
 
    useEffect(() => {
       async function fetchApi() {
-         const response = await fetch(ipUrl);
-         const json = await response.json();
-         setIp(json.query);
-         setCity(json.regionName);
-         setCountry(json.country);
-         setTimezone(json.timezone);
-         setIsp(json.isp);
-         setLat(json.lat);
-         setLong(json.lon);
-         setLoading(false);
+         await fetch(ipUrl)
+            .then(res => res.json())
+            .then(json => {
+               setIp(json.query);
+               setCity(json.regionName);
+               setCountry(json.country);
+               setTimezone(json.timezone);
+               setIsp(json.isp);
+               setLat(json.lat);
+               setLong(json.lon);
+               setLoading(false);
+            });
       }
-
       fetchApi();
-   }, [ipUrl]);
+   }, []);
+
+   async function updateUi(Ip) {
+      setLoading(true);
+      await fetch(ipUrl + Ip)
+         .then(res => res.json())
+         .then(json => {
+            setIp(json.query);
+            setCity(json.regionName);
+            setCountry(json.country);
+            setTimezone(json.timezone);
+            setIsp(json.isp);
+            setLat(json.lat);
+            setLong(json.lon);
+            setLoading(false);
+         });
+   }
 
    function handleSubmit(e, inputValue) {
       e.preventDefault();
-      setIpUrl(`http://ip-api.com/json/${inputValue}`);
+      updateUi(inputValue);
    }
 
    return (
@@ -47,7 +64,13 @@ const App = () => {
             isp={isp}
          />
          {loading ? null : (
-            <Map country={country} city={city} lat={lat} long={long} />
+            <Map
+               country={country || 'Invalid ip'}
+               city={city || 'Invalid ip'}
+               lat={lat || 'Invalid ip'}
+               long={long || 'Invalid ip'}
+               ipUrl={ipUrl || 'Invalid ip'}
+            />
          )}
       </>
    );

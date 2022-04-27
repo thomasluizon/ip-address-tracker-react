@@ -69,7 +69,7 @@
       }
 
       h2 {
-         font-size: 0.8rem;
+         font-size: 0.6rem;
          color: gray;
          text-transform: uppercase;
          font-weight: 600;
@@ -78,7 +78,7 @@
       h3 {
          margin-bottom: calc($gap + 1rem);
          font-weight: bold;
-         font-size: 1.2rem;
+         font-size: 1rem;
       }
    }
 }
@@ -87,8 +87,12 @@
    .header {
       .header__info {
          flex-direction: column;
-         bottom: -10rem;
-         height: 100%;
+         bottom: -200px;
+         height: 290px;
+      }
+
+      .header__info-box {
+         border: none;
       }
    }
 }
