@@ -4,7 +4,7 @@ import Map from '../../components/Map/Map';
 
 const App = () => {
    const ipUrl =
-      'https://geo.ipify.org/api/v2/country,city?apiKey=at_Lj4JCLj6nAgNFwvfSVCGAgXTJzIPn&';
+      'https://geo.ipify.org/api/v2/country,city?apiKey=at_2WcdNqY85TkQyyno6uBB6D14FsgTY&';
    const [ip, setIp] = useState('');
    const [city, setCity] = useState('');
    const [country, setCountry] = useState('');
@@ -24,8 +24,9 @@ const App = () => {
    }, []);
 
    const update = json => {
+      setLoading(true);
       setIp(json.ip);
-      setCity(json.location.city);
+      setCity(json.location.region);
       setCountry(json.location.country);
       setTimezone(json.location.timezone);
       setIsp(json.isp);
