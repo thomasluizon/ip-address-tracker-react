@@ -15,11 +15,9 @@ const App = () => {
 
    useEffect(() => {
       async function fetchApi() {
-         await fetch(ipUrl)
-            .then(res => res.json())
-            .then(json => {
-               update(json);
-            });
+         const res = await fetch(ipUrl);
+         const json = await res.json();
+         update(json);
       }
       fetchApi();
    }, []);
@@ -37,11 +35,9 @@ const App = () => {
 
    async function updateUi(Ip) {
       setLoading(true);
-      await fetch(ipUrl + Ip)
-         .then(res => res.json())
-         .then(json => {
-            update(json);
-         });
+      const res = await fetch(ipUrl + Ip);
+      const json = await res.json();
+      update(json);
    }
 
    function handleSubmit(e, inputValue) {
