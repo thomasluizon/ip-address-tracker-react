@@ -3,7 +3,8 @@ import Header from '../../components/Header/Header';
 import Map from '../../components/Map/Map';
 
 const App = () => {
-   const ipUrl = 'http://ip-api.com/json/';
+   const ipUrl =
+      'https://geo.ipify.org/api/v2/country,city?apiKey=at_Lj4JCLj6nAgNFwvfSVCGAgXTJzIPn&';
    const [ip, setIp] = useState('');
    const [city, setCity] = useState('');
    const [country, setCountry] = useState('');
@@ -23,19 +24,19 @@ const App = () => {
    }, []);
 
    const update = json => {
-      setIp(json.query);
-      setCity(json.regionName);
-      setCountry(json.country);
-      setTimezone(json.timezone);
+      setIp(json.ip);
+      setCity(json.location.city);
+      setCountry(json.location.country);
+      setTimezone(json.location.timezone);
       setIsp(json.isp);
-      setLat(json.lat);
-      setLong(json.lon);
+      setLat(json.location.lat);
+      setLong(json.location.lng);
       setLoading(false);
    };
 
    async function updateUi(Ip) {
       setLoading(true);
-      const res = await fetch(ipUrl + Ip);
+      const res = await fetch(ipUrl + 'ipAddress=' + Ip);
       const json = await res.json();
       update(json);
    }
