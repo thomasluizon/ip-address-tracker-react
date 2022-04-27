@@ -18,32 +18,29 @@ const App = () => {
          await fetch(ipUrl)
             .then(res => res.json())
             .then(json => {
-               setIp(json.query);
-               setCity(json.regionName);
-               setCountry(json.country);
-               setTimezone(json.timezone);
-               setIsp(json.isp);
-               setLat(json.lat);
-               setLong(json.lon);
-               setLoading(false);
+               update(json);
             });
       }
       fetchApi();
    }, []);
+
+   const update = json => {
+      setIp(json.query);
+      setCity(json.regionName);
+      setCountry(json.country);
+      setTimezone(json.timezone);
+      setIsp(json.isp);
+      setLat(json.lat);
+      setLong(json.lon);
+      setLoading(false);
+   };
 
    async function updateUi(Ip) {
       setLoading(true);
       await fetch(ipUrl + Ip)
          .then(res => res.json())
          .then(json => {
-            setIp(json.query);
-            setCity(json.regionName);
-            setCountry(json.country);
-            setTimezone(json.timezone);
-            setIsp(json.isp);
-            setLat(json.lat);
-            setLong(json.lon);
-            setLoading(false);
+            update(json);
          });
    }
 
